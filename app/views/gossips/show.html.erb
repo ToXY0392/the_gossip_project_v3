@@ -1,0 +1,12 @@
+<h1><%= @gossip.title %></h1>
+
+<p>
+  <strong>Author:</strong>
+  <%= link_to @gossip.user.first_name, user_path(@gossip.user) %>
+</p>
+
+<p>
+  <%= @gossip.content %>
+</p>
+
+<%= link_to "Back", root_path, class: "btn btn-secondary" %>

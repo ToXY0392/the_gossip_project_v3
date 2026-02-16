@@ -1,0 +1,17 @@
+<h1 class="mb-4">Latest Gossips</h1>
+
+<div class="row">
+  <% @gossips.each do |gossip| %>
+    <div class="col-md-4 mb-4">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title"><%= gossip.title %></h5>
+          <p class="card-text">
+            By <%= gossip.user.first_name %>
+          </p>
+          <%= link_to "Voir plus", gossip_path(gossip), class: "btn btn-primary btn-sm" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
