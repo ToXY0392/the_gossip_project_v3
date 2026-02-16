@@ -1,17 +1,46 @@
-<h1 class="mb-4">Latest Gossips</h1>
+<section class="mb-4">
+  <div class="card border-0 shadow-sm overflow-hidden">
+    <div class="card-body p-4 p-md-5">
+      <p class="gossip-kicker text-uppercase mb-2">Une</p>
+      <h1 class="display-5 mb-3">Latest Gossips</h1>
+      <p class="lead text-body-secondary mb-0">
+        Les histoires du moment, triees par edition, pour celles et ceux qui veulent tout savoir avant tout le monde.
+      </p>
+    </div>
+  </div>
+</section>
 
-<div class="row">
-  <% @gossips.each do |gossip| %>
-    <div class="col-md-4 mb-4">
-      <div class="card shadow-sm">
-        <div class="card-body">
-          <h5 class="card-title"><%= gossip.title %></h5>
-          <p class="card-text">
-            By <%= gossip.user.first_name %>
-          </p>
-          <%= link_to "Voir plus", gossip_path(gossip), class: "btn btn-primary btn-sm" %>
-        </div>
+<section>
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="h3 mb-0">Trending Stories</h2>
+    <span class="badge rounded-pill text-bg-danger"><%= @gossips.count %> publie(s)</span>
+  </div>
+
+  <div class="row g-4">
+    <% @gossips.each do |gossip| %>
+      <div class="col-12 col-md-6 col-xl-4">
+        <article class="card h-100 shadow-sm gossip-card">
+          <div class="card-body d-flex flex-column">
+            <div class="d-flex justify-content-between align-items-start gap-2 mb-3">
+              <span class="badge text-bg-dark border border-secondary-subtle">Exclusif</span>
+              <small class="text-body-secondary">Par <%= gossip.user.first_name %></small>
+            </div>
+            <h3 class="h5 card-title"><%= gossip.title %></h3>
+            <p class="card-text text-body-secondary mb-4">
+              <%= truncate(gossip.content, length: 115) %>
+            </p>
+            <div class="mt-auto">
+              <%= link_to "Lire le dossier", gossip_path(gossip), class: "btn btn-gossip btn-sm" %>
+            </div>
+          </div>
+        </article>
       </div>
+    <% end %>
+  </div>
+
+  <% if @gossips.empty? %>
+    <div class="alert alert-dark border-secondary-subtle mt-3 mb-0" role="alert">
+      Aucune rumeur publiee pour le moment.
     </div>
   <% end %>
-</div>
+</section>
