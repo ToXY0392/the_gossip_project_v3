@@ -1,0 +1,7 @@
+one:
+  name: Paris
+  zip_code: 75001
+
+two:
+  name: Lyon
+  zip_code: 69001

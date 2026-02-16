@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   def home
-    @gossips = Gossip.all
+    @gossips = Gossip.includes(:user).order(created_at: :desc)
   end
 
   def team

@@ -1,0 +1,15 @@
+one:
+  first_name: Jean
+  last_name: Dupont
+  description: Auteur passionné
+  email: jean.dupont@example.com
+  age: 30
+  city: one
+
+two:
+  first_name: Marie
+  last_name: Martin
+  description: Amatrice de potins
+  email: marie.martin@example.com
+  age: 25
+  city: two
