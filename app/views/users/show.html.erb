@@ -1,14 +1,54 @@
-<h1><%= @user.first_name %> <%= @user.last_name %></h1>
+<section class="row g-4">
+  <div class="col-12 col-lg-4">
+    <div class="card shadow-sm h-100 border-secondary-subtle">
+      <div class="card-body">
+        <p class="gossip-kicker text-uppercase mb-2">Profil source</p>
+        <h1 class="h2 mb-1"><%= @user.first_name %> <%= @user.last_name %></h1>
+        <p class="text-body-secondary mb-4">Correspondant local</p>
 
-<p>Email: <%= @user.email %></p>
-<p>City: <%= @user.city.name %></p>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item bg-transparent px-0">
+            <span class="text-body-secondary d-block small">Email</span>
+            <span class="fw-medium"><%= @user.email %></span>
+          </li>
+          <li class="list-group-item bg-transparent px-0">
+            <span class="text-body-secondary d-block small">Ville</span>
+            <span class="fw-medium"><%= @user.city.name %></span>
+          </li>
+          <li class="list-group-item bg-transparent px-0">
+            <span class="text-body-secondary d-block small">Publications</span>
+            <span class="badge text-bg-danger"><%= @user.gossips.count %></span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-<h3 class="mt-4">Gossips:</h3>
+  <div class="col-12 col-lg-8">
+    <div class="card shadow-sm border-secondary-subtle">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h2 class="h4 mb-0">Gossips publies</h2>
+          <span class="badge rounded-pill text-bg-dark border border-secondary-subtle">Archive</span>
+        </div>
 
-<ul>
-  <% @user.gossips.each do |gossip| %>
-    <li>
-      <%= link_to gossip.title, gossip_path(gossip) %>
-    </li>
-  <% end %>
-</ul>
+        <div class="list-group list-group-flush">
+          <% @user.gossips.each do |gossip| %>
+            <%= link_to gossip_path(gossip), class: "list-group-item list-group-item-action bg-transparent px-0" do %>
+              <div class="d-flex justify-content-between align-items-center gap-3">
+                <span class="fw-medium"><%= gossip.title %></span>
+                <span class="btn btn-outline-light btn-sm">Lire</span>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+
+        <% if @user.gossips.empty? %>
+          <div class="alert alert-dark border-secondary-subtle mt-3 mb-0" role="alert">
+            Cet utilisateur n'a encore publie aucun gossip.
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

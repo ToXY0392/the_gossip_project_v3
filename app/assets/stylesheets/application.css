@@ -8,3 +8,138 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Serif+4:wght@400;600;700&display=swap");
+
+[data-bs-theme="dark"] {
+  --bs-body-bg: #0c0d10;
+  --bs-body-color: #f1eadf;
+  --bs-secondary-color: #b5aea3;
+  --bs-tertiary-bg: #13151b;
+  --bs-border-color: #343845;
+  --bs-card-bg: #151821;
+  --bs-primary: #c96b1a;
+  --bs-primary-rgb: 201, 107, 26;
+  --bs-danger: #e57c1f;
+  --bs-danger-rgb: 229, 124, 31;
+  --bs-link-color: #ffa247;
+  --bs-link-hover-color: #ffc98f;
+  --bs-focus-ring-color: rgba(255, 162, 71, 0.35);
+}
+
+body {
+  position: relative;
+  isolation: isolate;
+  font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+  background:
+    radial-gradient(1200px 500px at 5% -20%, rgba(229, 124, 31, 0.14), transparent 50%),
+    radial-gradient(900px 600px at 95% 0%, rgba(87, 104, 178, 0.12), transparent 50%),
+    var(--bs-body-bg);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 20% 25%, rgba(255, 167, 77, 0.2), transparent 28%),
+    radial-gradient(circle at 80% 15%, rgba(95, 190, 255, 0.15), transparent 30%),
+    radial-gradient(circle at 50% 85%, rgba(162, 115, 255, 0.12), transparent 34%);
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.25;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(circle at center, #000 35%, transparent 95%);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.gossip-brand {
+  font-family: "Bebas Neue", "Arial Narrow", sans-serif;
+  letter-spacing: 0.02em;
+}
+
+.gossip-brand {
+  color: var(--bs-body-color);
+  text-decoration: none;
+}
+
+.gossip-kicker {
+  color: #ffb366;
+  letter-spacing: 0.18em;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.card {
+  border-width: 1px;
+  background:
+    linear-gradient(160deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0)) var(--bs-card-bg);
+  box-shadow:
+    0 0 0 1px rgba(255, 167, 77, 0.2),
+    0 0 22px rgba(255, 162, 71, 0.18),
+    0 0 42px rgba(80, 130, 255, 0.1);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 183, 110, 0.85);
+  box-shadow:
+    0 0 0 1px rgba(255, 178, 98, 0.5),
+    0 0 24px rgba(255, 153, 51, 0.3),
+    0 0 56px rgba(108, 157, 255, 0.2);
+}
+
+.gossip-card .card-title {
+  line-height: 1.1;
+}
+
+.nav-pills .nav-link {
+  color: var(--bs-body-color);
+  border: 1px solid transparent;
+}
+
+.nav-pills .nav-link:hover,
+.nav-pills .nav-link:focus {
+  background-color: var(--bs-tertiary-bg);
+  border-color: var(--bs-border-color);
+}
+
+.nav-pills .nav-link.active {
+  background-color: var(--bs-danger);
+  color: #fff;
+}
+
+.btn-gossip {
+  --bs-btn-color: #1a1107;
+  --bs-btn-bg: #ff9f43;
+  --bs-btn-border-color: #ff9f43;
+  --bs-btn-hover-color: #1a1107;
+  --bs-btn-hover-bg: #ffb366;
+  --bs-btn-hover-border-color: #ffb366;
+  --bs-btn-focus-shadow-rgb: 255, 179, 102;
+  --bs-btn-active-color: #1a1107;
+  --bs-btn-active-bg: #f08f2f;
+  --bs-btn-active-border-color: #f08f2f;
+  font-weight: 700;
+}
+
+.list-group-item {
+  border-color: var(--bs-border-color);
+}
