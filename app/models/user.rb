@@ -1,6 +1,10 @@
 class User < ApplicationRecord
   belongs_to :city
 
+  validates :first_name, :last_name, :email, :city_id, presence: true
+  validates :email, uniqueness: true
+  validates :age, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_nil: true
+
   has_many :gossips
   has_many :comments
 

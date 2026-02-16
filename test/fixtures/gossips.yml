@@ -1,0 +1,9 @@
+one:
+  title: Premier potin
+  content: Voici le contenu du premier gossip de test.
+  user: one
+
+two:
+  title: Deuxième potin
+  content: Voici le contenu du deuxième gossip de test.
+  user: two

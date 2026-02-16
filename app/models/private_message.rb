@@ -3,4 +3,6 @@ class PrivateMessage < ApplicationRecord
 
   has_many :private_message_recipients
   has_many :recipients, through: :private_message_recipients, source: :recipient
+
+  validates :content, :sender_id, presence: true
 end
