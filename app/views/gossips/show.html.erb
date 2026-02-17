@@ -15,6 +15,12 @@
     <div class="d-flex gap-2">
       <%= link_to "Retour aux gossips", root_path, class: "btn btn-outline-light" %>
       <%= link_to "Voir l'auteur", user_path(@gossip.user), class: "btn btn-danger" %>
+      <%= link_to "Modifier", edit_gossip_path(@gossip), class: "btn btn-warning" %>
+      <%= button_to "Supprimer",
+                    gossip_path(@gossip),
+                    method: :delete,
+                    form: { data: { turbo_confirm: "Tu es sûr de vouloir supprimer ce potin ?" } },
+                    class: "btn btn-outline-danger" %>
     </div>
   </div>
 </article>

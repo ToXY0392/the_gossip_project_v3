@@ -118,7 +118,7 @@ puts "❤️ Creating likes..."
 20.times do
   Like.create!(
     user: User.all.sample,
-    gossip: Gossip.all.sample
+    likeable: Gossip.all.sample
   )
 end
 puts "✅ #{Like.count} likes created.\n\n"

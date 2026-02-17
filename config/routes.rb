@@ -1,8 +1,17 @@
 Rails.application.routes.draw do
-root "pages#home"
-get "/team", to: "pages#team", as: :team
-get "/contact", to: "pages#contact", as: :contact
-get "/welcome/:first_name", to: "pages#welcome", as: :welcome
-get "/gossips/:id", to: "gossips#show", as: :gossip
-get "/users/:id", to: "users#show", as: :user
+  root "pages#home"
+
+  get "/team", to: "pages#team", as: :team
+  get "/contact", to: "pages#contact", as: :contact
+  get "/welcome/:first_name", to: "pages#welcome", as: :welcome
+
+  get  "/signup", to: "users#new",    as: :signup
+  post "/signup", to: "users#create", as: :users
+
+  get  "/login",  to: "sessions#new",     as: :login
+  post "/login",  to: "sessions#create"
+  delete "/logout", to: "sessions#destroy", as: :logout
+
+  resources :gossips, only: [:show, :new, :create, :edit, :update, :destroy]
+  get "/users/:id", to: "users#show", as: :user
 end
