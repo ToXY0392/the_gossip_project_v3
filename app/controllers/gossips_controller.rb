@@ -44,10 +44,8 @@ class GossipsController < ApplicationController
 
   def destroy
     @gossip = Gossip.find(params[:id])
-    return redirect_to root_path, alert: "Accès refusé." unless current_user == @gossip.user
-
     @gossip.destroy
-    redirect_to user_path(current_user), notice: "Ton potin a été supprimé."
+    redirect_to root_path, notice: "Le potin a été supprimé."
   end
 
   private
