@@ -159,6 +159,13 @@ h6,
   background-color: var(--bs-tertiary-bg);
 }
 
+/* Badge style Login (fond sombre, bordure orange) */
+.badge-login-style {
+  background-color: var(--bs-tertiary-bg) !important;
+  color: var(--bs-body-color) !important;
+  border: 1px solid #e57c1f;
+}
+
 .btn-gossip {
   --bs-btn-color: #1a1107;
   --bs-btn-bg: #ff9f43;
