@@ -126,6 +126,39 @@ h6,
   color: #fff;
 }
 
+/* Home et Login : design outline (fond sombre, bordure orange) actif et inactif */
+.nav-pills .nav-link.nav-link-primary {
+  background-color: var(--bs-tertiary-bg);
+  color: var(--bs-body-color);
+  border-color: #e57c1f;
+}
+
+.nav-pills .nav-link.nav-link-primary.active {
+  background-color: var(--bs-tertiary-bg);
+  color: var(--bs-body-color);
+  border-color: #e57c1f;
+}
+
+.nav-pills .nav-link.nav-link-primary:hover,
+.nav-pills .nav-link.nav-link-primary.active:hover {
+  border-color: #ffa247;
+  background-color: var(--bs-tertiary-bg);
+}
+
+/* Bouton Home en bas du body – même design que nav-link-primary */
+.btn-home-footer {
+  background-color: var(--bs-tertiary-bg);
+  color: var(--bs-body-color);
+  border: 1px solid #e57c1f;
+  border-radius: 0.375rem;
+}
+
+.btn-home-footer:hover {
+  border-color: #ffa247;
+  color: var(--bs-body-color);
+  background-color: var(--bs-tertiary-bg);
+}
+
 .btn-gossip {
   --bs-btn-color: #1a1107;
   --bs-btn-bg: #ff9f43;
@@ -140,6 +173,53 @@ h6,
   font-weight: 700;
 }
 
+/* Bouton Se connecter : style actif (orange) */
+.form-login .btn-login-submit,
+.form-login .btn-login-submit:not(:disabled):not(.btn-inactive) {
+  background-color: #ff9f43 !important;
+  border-color: #ff9f43 !important;
+  color: #1a1107 !important;
+  font-weight: 700;
+}
+
+.form-login .btn-login-submit:hover:not(:disabled),
+.form-login .btn-login-submit:focus:not(:disabled) {
+  background-color: #ffb366 !important;
+  border-color: #ffb366 !important;
+  color: #1a1107 !important;
+}
+
+.form-login .btn-login-submit:disabled,
+.form-login .btn-login-submit.btn-inactive {
+  background-color: transparent !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+  color: var(--bs-body-color) !important;
+}
+
 .list-group-item {
   border-color: var(--bs-border-color);
+}
+
+/* User/Compte nav cards – design adapté à l'app */
+.user-nav-card {
+  background-color: #252b38;
+  background-image: none;
+  border: 1px solid #e57c1f;
+  box-shadow: none;
+  transition: border-color 180ms ease;
+}
+
+.user-nav-card:hover {
+  border-color: #ffa247;
+}
+
+.user-nav-card .btn-outline-light {
+  color: var(--bs-secondary-color);
+  border-color: var(--bs-secondary-color);
+}
+
+.user-nav-card .btn-outline-light:hover {
+  border-color: var(--bs-body-color);
+  color: var(--bs-body-color);
+  background-color: var(--bs-tertiary-bg);
 }

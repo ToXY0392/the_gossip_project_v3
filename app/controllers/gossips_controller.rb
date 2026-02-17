@@ -5,6 +5,7 @@ class GossipsController < ApplicationController
 
   def edit
     @gossip = Gossip.find(params[:id])
+    return redirect_to root_path, alert: "Accès refusé." unless current_user == @gossip.user
   end
 
   def new
@@ -32,6 +33,7 @@ class GossipsController < ApplicationController
 
   def update
     @gossip = Gossip.find(params[:id])
+    return redirect_to root_path, alert: "Accès refusé." unless current_user == @gossip.user
 
     if @gossip.update(gossip_params)
       redirect_to @gossip, notice: "Ton potin a été mis à jour."
@@ -42,8 +44,10 @@ class GossipsController < ApplicationController
 
   def destroy
     @gossip = Gossip.find(params[:id])
+    return redirect_to root_path, alert: "Accès refusé." unless current_user == @gossip.user
+
     @gossip.destroy
-    redirect_to root_path, notice: "Ton potin a été supprimé."
+    redirect_to user_path(current_user), notice: "Ton potin a été supprimé."
   end
 
   private

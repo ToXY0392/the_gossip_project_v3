@@ -1,3 +1,12 @@
+<% if current_user && current_user.id == @user.id %>
+  <section class="mb-4">
+    <div class="d-flex flex-wrap gap-2">
+      <%= link_to "Mes potins", user_path(@user), class: "btn btn-gossip" %>
+      <%= link_to "Compte", user_path(@user), class: "btn btn-outline-secondary" %>
+    </div>
+  </section>
+<% end %>
+
 <section class="row g-4">
   <div class="col-12 col-lg-4">
     <div class="card shadow-sm h-100 border-secondary-subtle">
@@ -27,25 +36,34 @@
   <div class="col-12 col-lg-8">
     <div class="card shadow-sm border-secondary-subtle">
       <div class="card-body">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-          <h2 class="h4 mb-0">Gossips publies</h2>
-          <span class="badge rounded-pill text-bg-dark border border-secondary-subtle">Archive</span>
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+          <h2 class="h4 mb-0"><%= current_user && current_user.id == @user.id ? "Mes potins" : "Gossips publiés" %></h2>
+          <% if current_user && current_user.id == @user.id %>
+            <%= link_to "Ajouter un potin", new_gossip_path, class: "btn btn-gossip btn-sm" %>
+          <% end %>
         </div>
 
         <div class="list-group list-group-flush">
           <% @user.gossips.each do |gossip| %>
-            <%= link_to gossip_path(gossip), class: "list-group-item list-group-item-action bg-transparent px-0" do %>
-              <div class="d-flex justify-content-between align-items-center gap-3">
-                <span class="fw-medium"><%= gossip.title %></span>
-                <span class="btn btn-outline-light btn-sm">Lire</span>
+            <div class="list-group-item bg-transparent px-0 d-flex justify-content-between align-items-center gap-2 flex-wrap">
+              <%= link_to gossip.title, gossip_path(gossip), class: "fw-medium text-decoration-none link-light" %>
+              <div class="d-flex gap-1">
+                <% if current_user == gossip.user %>
+                  <%= link_to "Modifier", edit_gossip_path(gossip), class: "btn btn-outline-light btn-sm" %>
+                  <%= button_to "Supprimer", gossip_path(gossip), method: :delete,
+                      class: "btn btn-outline-danger btn-sm",
+                      form: { data: { turbo_confirm: "Supprimer ce potin ?" } } %>
+                <% else %>
+                  <%= link_to "Lire", gossip_path(gossip), class: "btn btn-outline-light btn-sm" %>
+                <% end %>
               </div>
-            <% end %>
+            </div>
           <% end %>
         </div>
 
         <% if @user.gossips.empty? %>
           <div class="alert alert-dark border-secondary-subtle mt-3 mb-0" role="alert">
-            Cet utilisateur n'a encore publie aucun gossip.
+            <%= current_user && current_user.id == @user.id ? "Tu n'as encore publié aucun potin." : "Cet utilisateur n'a encore publié aucun gossip." %>
           </div>
         <% end %>
       </div>
