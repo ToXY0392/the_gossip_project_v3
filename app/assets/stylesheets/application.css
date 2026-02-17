@@ -145,7 +145,7 @@ h6,
   background-color: var(--bs-tertiary-bg);
 }
 
-/* Bouton Home en bas du body – même design que nav-link-primary */
+/* Bouton Home / CTA – fond sombre, bordure orange (style outline) */
 .btn-home-footer {
   background-color: var(--bs-tertiary-bg);
   color: var(--bs-body-color);
@@ -180,20 +180,19 @@ h6,
   font-weight: 700;
 }
 
-/* Bouton Se connecter : style actif (orange) */
+/* Bouton Se connecter : même design que btn-home-footer (fond sombre, bordure orange) */
 .form-login .btn-login-submit,
 .form-login .btn-login-submit:not(:disabled):not(.btn-inactive) {
-  background-color: #ff9f43 !important;
-  border-color: #ff9f43 !important;
-  color: #1a1107 !important;
-  font-weight: 700;
+  background-color: var(--bs-tertiary-bg) !important;
+  border: 1px solid #e57c1f !important;
+  color: var(--bs-body-color) !important;
 }
 
 .form-login .btn-login-submit:hover:not(:disabled),
 .form-login .btn-login-submit:focus:not(:disabled) {
-  background-color: #ffb366 !important;
-  border-color: #ffb366 !important;
-  color: #1a1107 !important;
+  border-color: #ffa247 !important;
+  color: var(--bs-body-color) !important;
+  background-color: var(--bs-tertiary-bg) !important;
 }
 
 .form-login .btn-login-submit:disabled,

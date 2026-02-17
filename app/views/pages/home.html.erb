@@ -1,13 +1,13 @@
 <section class="mb-4">
   <div class="card shadow-sm overflow-hidden gossip-card">
     <div class="card-body p-4 p-md-5">
-      <div class="d-flex justify-content-between align-items-start gap-3 mb-3">
-        <h1 class="display-5 mb-0">Bienvenue sur THP Gossip Project</h1>
-        <%= link_to "Nouveau potin", new_gossip_path, class: "btn btn-home-footer flex-shrink-0" %>
-      </div>
-      <p class="lead text-body-secondary mb-0">
+      <h1 class="display-5 mb-3 text-center">Bienvenue sur THP Gossip Project</h1>
+      <p class="lead text-body-secondary mb-0 text-center">
         Votre espace potin pour partager vos petits secrets, actuces et conseils pour réussir votre formation <%= link_to "The Hacking Project.", "https://www.thehackingproject.org", target: "_blank", rel: "noopener", class: "link-primary link-offset-2 text-decoration-none" %>
       </p>
+      <div class="text-center mt-3">
+        <%= link_to "Nouveau potin", new_gossip_path, class: "btn btn-home-footer" %>
+      </div>
     </div>
   </div>
 </section>
