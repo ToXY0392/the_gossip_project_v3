@@ -15,14 +15,22 @@
         <h1 class="h2 mb-1"><%= @user.first_name %> <%= @user.last_name %></h1>
         <p class="text-body-secondary mb-4">Correspondant local</p>
 
+        <% if @user.description.present? %>
+          <p class="text-body-secondary small mb-3"><%= @user.description %></p>
+        <% end %>
+
         <ul class="list-group list-group-flush">
           <li class="list-group-item bg-transparent px-0">
             <span class="text-body-secondary d-block small">Email</span>
             <span class="fw-medium"><%= @user.email %></span>
           </li>
           <li class="list-group-item bg-transparent px-0">
+            <span class="text-body-secondary d-block small">Âge</span>
+            <span class="fw-medium"><%= @user.age.present? ? @user.age : "—" %></span>
+          </li>
+          <li class="list-group-item bg-transparent px-0">
             <span class="text-body-secondary d-block small">Ville</span>
-            <span class="fw-medium"><%= @user.city.name %></span>
+            <span class="fw-medium"><%= link_to @user.city.name, city_path(@user.city), class: "link-light link-offset-2" %></span>
           </li>
           <li class="list-group-item bg-transparent px-0">
             <span class="text-body-secondary d-block small">Publications</span>

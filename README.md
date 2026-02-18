@@ -1,104 +1,159 @@
-# 🗞️ The Gossip Project
+# 🗞️ The Gossip Project – Full CRUD
 
-A Ruby on Rails application built as part of The Hacking Project bootcamp (THP). This project introduces Rails MVC structure, routing with params, dynamic pages, database usage with ActiveRecord, and Bootstrap integration.
+A Ruby on Rails application built as part of **The Hacking Project** bootcamp (THP).  
+Goal: implement a **full CRUD** on gossips, plus a partial CRUD on **comments**, with navigation between **users**, **cities**, and **tags**, and a dark-themed **Bootstrap** UI.
 
-###  The application displays a simple gossip website with:
-- 🏠 Static pages (Home, Team, Contact)
-- 👋 A personalized landing page using URL params
-- 📜 A dynamic gossip index
-- 🔎 A dynamic gossip show page
-- 👤 A user profile page
-- 🎨 Bootstrap styling with a navigation header
+---
 
+## 🧩 Main Features
 
-## 🛠️ TECH STACK
+### 🏠 Homepage (`/`)
+- Lists all gossips as cards.
+- For each gossip:
+  - 👤 Author first name
+  - 🗣️ Title
+  - ✂️ Truncated content
+  - 💬 Number of related comments
+  - 🔗 “Lire le dossier” button linking to the gossip show page.
 
-- 💎 Ruby 3.4.2
-- 🚂 Rails 7.1.x
-- 🗄️ SQLite3
-- 🎨 Bootstrap (CDN)
-- 🎲 Faker (for database seeds)
+### 🔎 Gossip – Show (`/gossips/:id`)
+- Displays:
+  - 📝 Title  
+  - 📖 Full content  
+  - 👤 Author (with link to user profile)  
+  - 🏙️ Author’s city (with link to city page)  
+  - 🏷️ Tags associated with the gossip  
+- Actions:
+  - ✏️ Edit gossip  
+  - 🗑️ Delete gossip (only for the author, with `current_user == @gossip.user`)  
+- Comments:
+  - 📥 Form to **add a comment** to the gossip  
+  - 📜 List of comments with:
+    - Comment author  
+    - Comment text  
+    - “Modifier” link to the comment edit page  
 
+### ✏️ Gossips – New / Edit
+- Form for creating and editing a gossip:
+  - `title`
+  - `content`
+  - `tag` (select an existing tag via dropdown)
+- After create / update:
+  - Redirects to the gossip show page.
 
-## ✨ FEATURES
+### 💣 Destroy Gossip
+- From the gossip show page:
+  - “Supprimer” button deletes the gossip and **all its comments** (`dependent: :destroy`).
+  - Redirects to the index (homepage).
 
-🏠 Homepage (/)  
-Displays all gossips with:
-- 👤 Author first name
-- 🗣️ Gossip title
-- 🔗 Link to the gossip show page
+### 👤 User – Show (`/users/:id`)
+- Displays:
+  - First name, last name  
+  - Description  
+  - Email  
+  - Age  
+  - City (with link to city page)  
+  - Number of published gossips  
+- Lists all gossips by the user, with actions:
+  - If it’s the `current_user`: edit / delete  
+  - Otherwise: read-only access  
 
-👥 Team page (/team)  
-Static page.
+### 🏙️ City – Show (`/cities/:id`)
+- Displays:
+  - City name  
+  - Zip code  
+- Lists all gossips published by users from that city, using the same card style as the homepage.
 
-📞 Contact page (/contact)  
-Static page.
+### 💬 Comments
+- Created from the gossip show page.  
+- Edited / deleted via dedicated routes:
+  - `comments#edit`, `comments#update`, `comments#destroy`  
+- Each comment belongs to:
+  - a `User` (either `current_user` or a seeded user),
+  - a `Gossip`.
 
-👋 Welcome page (/welcome/:first_name)  
-Dynamic page using URL params.
+### 🏷️ Tags
+- 10 tags are created in the seed.  
+- When creating or editing a gossip:
+  - Select one tag from existing tags.  
+  - Association is handled through the `GossipTag` join model.  
+- Tags are rendered as badges on the gossip show page.
 
-🔎 Gossip show (/gossips/:id)  
-Displays:
-- 📝 Gossip title
-- 📖 Gossip content
-- 👤 Author information
-- 📅 Creation date
+### 🧭 Static Pages & Navigation
+- `/team`, `/contact`, `/welcome/:first_name`  
+- Bootstrap header with:
+  - Links: Home, Team, Contact  
+  - Session handling (login/logout + profile access)  
+- Global UI uses **Bootstrap 5** (CDN) with a dark theme.
 
-👤 User show (/users/:id)  
-Displays user profile information.
+---
 
+## 🛠️ Tech Stack
 
-## 🗄️ DATABASE STRUCTURE
+- 💎 Ruby 3.4.2  
+- 🚂 Rails 7.1.x  
+- 🗄️ SQLite3  
+- 🎨 Bootstrap 5 (CDN)  
+- 🎲 Faker (for seeds)  
 
-Models included in the project:
+---
 
-🏙️ City  
-👤 User  
-🗣️ Gossip  
-🏷️ Tag  
-🔗 GossipTag  
-💬 Comment  
-❤️ Like  
-📩 PrivateMessage  
-📬 PrivateMessageRecipient  
+## 🗄️ Models & Associations
 
-Main associations:
+Main models:
 
-City has_many Users.  
-User belongs_to City and has_many Gossips.  
-Gossip belongs_to User.  
-Gossip has_many Tags through GossipTag.  
-Users can send PrivateMessages.  
-PrivateMessages have multiple recipients through PrivateMessageRecipient.  
-Comments and Likes belong to both User and Gossip.
+- 🏙️ `City` – has_many `users`, has_many `gossips` **through** `users`  
+- 👤 `User` – belongs_to `city`, has_many `gossips`, has_many `comments`, has_many `likes`  
+- 🗣️ `Gossip` – belongs_to `user`, has_many `comments`, has_many `tags` **through** `gossip_tags`, has_many `likes` (polymorphic)  
+- 💬 `Comment` – belongs_to `user`, belongs_to `gossip`, has_many `likes` (polymorphic)  
+- 🏷️ `Tag` – has_many `gossips` **through** `gossip_tags`  
+- 🔗 `GossipTag` – join model between `gossip` and `tag`  
+- 📩 `PrivateMessage` & 📬 `PrivateMessageRecipient` – private messaging between users  
+- ❤️ `Like` – polymorphic like on `Gossip` and `Comment`  
 
+---
 
-## 🌱 SEEDING
+## 🌱 Seeding
 
-The database uses Faker to generate French and fun office-style data:
-- 🏙️ Cities
-- 👤 Users
-- 🗣️ Gossips
-- 🏷️ Tags
-- 🔗 GossipTag relations
-- 📩 Private messages
-- 💬 Comments
-- ❤️ Likes
+The database seed (`db/seeds.rb`) uses Faker to generate French, office-style data:
 
-To reset and seed the database:
+- 🏙️ 10 cities  
+- 👤 10 users with description, age, city  
+- 🗣️ 20 gossips  
+- 🏷️ 10 tags  
+- 🔗 `GossipTag` relations (1–3 tags per gossip)  
+- 📩 Private messages + recipients  
+- 💬 20 comments (without the `(source: tkt)` suffix)  
+- ❤️ 20 likes  
 
-bundle exec rails db:drop db:create db:migrate db:seed
+To fully reset and seed the database:
 
+```bash
+bin/rails db:drop db:create db:migrate db:seed
+```
 
-## 🚀 INSTALLATION
+---
 
-1. Clone the repository.
-2. Run: bundle install
-3. Run: bundle exec rails db:setup
-4. Start server: ./bin/dev
+## 🚀 Installation & Run
 
+```bash
+# Install gems
+bundle install
 
-##  🌳 FILE TREE
+# Prepare DB (create + migrate + seed)
+bin/rails db:setup
+# or
+bin/rails db:create db:migrate db:seed
+
+# Start dev server (Rails + assets)
+bin/dev
+```
+
+App will be available at `http://localhost:3000`.
+
+---
+
+## 🌳 File Tree (simplified)
 
 
 
@@ -272,16 +327,17 @@ the_gossip_project
 ```
 
 
-## 🎯 EXPECTED THP OUTPUT
+## 🎯 THP Expected Output
 
-An application named the_gossip_project that:
-- Displays static pages
-- Handles personalized landing pages
-- Displays a gossip index
-- Displays a gossip show page
-- Uses Bootstrap
-- Contains a working navigation header
+An application named `the_gossip_project` that:
 
+- Implements full CRUD on **gossips**  
+- Implements partial CRUD on **comments**  
+- Provides show pages for **gossip**, **user**, and **city**  
+- Uses **RESTful routes** (`resources`)  
+- Uses **Bootstrap** for styling and navigation  
+
+---
 
 👨‍💻 Author: Vincent Michel  
 🎓 The Hacking Project Bootcamp

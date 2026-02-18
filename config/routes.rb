@@ -12,6 +12,10 @@ Rails.application.routes.draw do
   post "/login",  to: "sessions#create"
   delete "/logout", to: "sessions#destroy", as: :logout
 
-  resources :gossips, only: [:show, :new, :create, :edit, :update, :destroy]
-  get "/users/:id", to: "users#show", as: :user
+  resources :cities, only: [:show]
+  resources :gossips, only: [:show, :new, :create, :edit, :update, :destroy] do
+    resources :comments, only: [:create]
+  end
+  resources :comments, only: [:edit, :update, :destroy]
+  resources :users, only: [:show]
 end

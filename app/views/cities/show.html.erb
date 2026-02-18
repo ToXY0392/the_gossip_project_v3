@@ -1,21 +1,17 @@
 <section class="mb-4">
   <div class="card shadow-sm overflow-hidden gossip-card">
     <div class="card-body p-4 p-md-5">
-      <h1 class="display-5 mb-3 text-center">Bienvenue sur THP Gossip Project</h1>
-      <p class="lead text-body-secondary mb-0 text-center">
-        Votre espace potin pour partager vos petits secrets, actuces et conseils pour réussir votre formation <%= link_to "The Hacking Project.", "https://www.thehackingproject.org", target: "_blank", rel: "noopener", class: "link-primary link-offset-2 text-decoration-none" %>
-      </p>
-      <div class="text-center mt-3">
-        <%= link_to "Nouveau potin", new_gossip_path, class: "btn btn-home-footer" %>
-      </div>
+      <p class="gossip-kicker text-uppercase mb-2">Ville</p>
+      <h1 class="display-5 mb-0"><%= @city.name %></h1>
+      <p class="text-body-secondary mb-0 mt-1"><%= @city.zip_code %></p>
     </div>
   </div>
 </section>
 
 <section>
   <div class="d-flex justify-content-between align-items-center mb-3">
-    <h2 class="h3 mb-0">Potins à la une</h2>
-    <span class="badge rounded-pill badge-login-style"><%= @gossips.count %> publie(s)</span>
+    <h2 class="h3 mb-0">Potins de la ville</h2>
+    <span class="badge rounded-pill badge-login-style"><%= @gossips.count %> potin(s)</span>
   </div>
 
   <div class="row g-4">
@@ -25,7 +21,7 @@
           <div class="card-body d-flex flex-column">
             <div class="d-flex justify-content-between align-items-start gap-2 mb-3">
               <span class="badge text-bg-dark border border-secondary-subtle">Exclusif</span>
-              <small class="text-body-secondary">Par <%= gossip.user.first_name %> · <%= gossip.comments.count %> commentaire(s)</small>
+              <small class="text-body-secondary">Par <%= gossip.user.first_name %></small>
             </div>
             <h3 class="h5 card-title"><%= gossip.title %></h3>
             <p class="card-text text-body-secondary mb-4">
@@ -42,7 +38,7 @@
 
   <% if @gossips.empty? %>
     <div class="alert alert-dark border-secondary-subtle mt-3 mb-0" role="alert">
-      Aucune rumeur publiée pour le moment.
+      Aucun potin pour cette ville pour le moment.
     </div>
   <% end %>
 </section>

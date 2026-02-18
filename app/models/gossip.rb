@@ -6,7 +6,7 @@ class Gossip < ApplicationRecord
   has_many :gossip_tags
   has_many :tags, through: :gossip_tags
 
-  has_many :comments
+  has_many :comments, dependent: :destroy
 
   # Likes (polymorphic)
   has_many :likes, as: :likeable

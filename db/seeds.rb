@@ -107,7 +107,7 @@ puts "✅ #{PrivateMessageRecipient.count} private_message_recipients created.\n
 puts "💬 Creating comments..."
 20.times do
   Comment.create!(
-    content: "#{Faker::Quote.famous_last_words}… (source: tkt)",
+    content: Faker::Quote.famous_last_words,
     user: User.all.sample,
     gossip: Gossip.all.sample
   )
