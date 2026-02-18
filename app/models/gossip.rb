@@ -9,5 +9,5 @@ class Gossip < ApplicationRecord
   has_many :comments, dependent: :destroy
 
   # Likes (polymorphic)
-  has_many :likes, as: :likeable
+  has_many :likes, as: :likeable, dependent: :destroy
 end
