@@ -13,14 +13,14 @@ class LikesController < ApplicationController
   end
 
   def destroy
-    like = Like.find(params[:id])
+    like = Like.find_by(id: params[:id])
 
-    if current_user && like.user == current_user
-      like.destroy
-      redirect_back fallback_location: root_path, notice: "Like retiré."
-    else
-      redirect_back fallback_location: root_path, alert: "Accès refusé."
+    unless like && current_user && like.user == current_user
+      return redirect_back fallback_location: root_path, alert: "Accès refusé."
     end
+
+    like.destroy
+    redirect_back fallback_location: root_path, notice: "Like retiré."
   end
 
   private
