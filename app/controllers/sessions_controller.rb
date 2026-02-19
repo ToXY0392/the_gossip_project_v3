@@ -3,16 +3,16 @@ class SessionsController < ApplicationController
   end
 
   def create
-    first_name = params[:first_name].to_s.strip
-    last_name  = params[:last_name].to_s.strip
+    email    = params[:email].to_s.strip
+    password = params[:password]
 
-    user = User.find_by(first_name: first_name, last_name: last_name)
+    user = User.find_by(email: email)
 
-    if user
+    if user&.authenticate(password)
       session[:user_id] = user.id
       redirect_to root_path, notice: "Connecté en tant que #{user.first_name}."
     else
-      flash.now[:alert] = "Aucun profil trouvé pour ce nom."
+      flash.now[:alert] = "Email ou mot de passe incorrect."
       render :new, status: :unprocessable_entity
     end
   end

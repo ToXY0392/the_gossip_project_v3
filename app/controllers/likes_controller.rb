@@ -1,15 +1,9 @@
 class LikesController < ApplicationController
+  before_action :require_login, only: [:create]
+
   def create
-    author = current_user || User.all.sample
-
-    unless author
-      redirect_back fallback_location: root_path, alert: "Aucun utilisateur disponible pour liker."
-      return
-    end
-
     likeable = find_likeable
-
-    like = Like.find_or_initialize_by(user: author, likeable: likeable)
+    like = Like.find_or_initialize_by(user: current_user, likeable: likeable)
 
     if like.persisted? || like.save
       redirect_back fallback_location: root_path, notice: "Potin liké."

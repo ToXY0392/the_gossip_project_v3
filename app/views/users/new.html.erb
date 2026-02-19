@@ -4,7 +4,7 @@
       <p class="gossip-kicker text-uppercase mb-2">Profil</p>
       <h1 class="display-5 mb-3">Créer ton profil</h1>
       <p class="lead text-body-secondary mb-0">
-        Un simple nom pour signer tes potins.
+        Inscris-toi avec ton email et un mot de passe pour créer et commenter des potins.
       </p>
     </div>
   </div>
@@ -33,6 +33,21 @@
         <div class="mb-3">
           <%= form.label :last_name, "Nom", class: "form-label" %>
           <%= form.text_field :last_name, class: "form-control", required: true %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :email, "Email", class: "form-label" %>
+          <%= form.email_field :email, class: "form-control", required: true, autocomplete: "email" %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :password, "Mot de passe", class: "form-label" %>
+          <%= form.password_field :password, class: "form-control", required: true, autocomplete: "new-password" %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :password_confirmation, "Confirmation du mot de passe", class: "form-label" %>
+          <%= form.password_field :password_confirmation, class: "form-control", required: true, autocomplete: "new-password" %>
         </div>
 
         <div class="d-flex gap-2">

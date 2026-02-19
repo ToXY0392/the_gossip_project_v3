@@ -1,0 +1,14 @@
+# Locale française pour l'application (config.i18n.default_locale = :fr)
+# Messages d'erreur ActiveRecord pour le modèle User (has_secure_password)
+
+fr:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            password:
+              blank: "ne peut pas être vide"
+              too_short: "est trop court (minimum %{count} caractères)"
+            password_confirmation:
+              confirmation: "doit correspondre au mot de passe"

@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_secure_password
+
   belongs_to :city
 
   validates :first_name, :last_name, :email, :city_id, presence: true

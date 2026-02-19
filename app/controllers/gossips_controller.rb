@@ -1,4 +1,6 @@
 class GossipsController < ApplicationController
+  before_action :require_login, only: [:new, :create, :show]
+
   def show
     @gossip = Gossip.find(params[:id])
   end
@@ -15,16 +17,7 @@ class GossipsController < ApplicationController
   end
 
   def create
-    # Si un user est connecté, on l'utilise comme auteur.
-    # Sinon, on choisit un auteur aléatoire parmi les utilisateurs existants.
-    author = current_user || User.all.sample
-
-    unless author
-      redirect_to root_path, alert: "Aucun auteur disponible pour ce potin. Crée d'abord un profil."
-      return
-    end
-
-    @gossip = author.gossips.new(gossip_params)
+    @gossip = current_user.gossips.new(gossip_params)
     @gossip.tag_ids = [params[:gossip][:tag_id]].compact if params[:gossip][:tag_id].present?
 
     if @gossip.save

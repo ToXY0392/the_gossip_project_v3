@@ -1,15 +1,10 @@
 class CommentsController < ApplicationController
+  before_action :require_login, only: [:create]
+
   def create
     @gossip = Gossip.find(params[:gossip_id])
-    author = current_user || User.all.sample
-
-    unless author
-      redirect_to @gossip, alert: "Aucun auteur disponible pour ce commentaire."
-      return
-    end
-
     @comment = @gossip.comments.build(comment_params)
-    @comment.user = author
+    @comment.user = current_user
 
     if @comment.save
       redirect_to @gossip, notice: "Commentaire ajouté."

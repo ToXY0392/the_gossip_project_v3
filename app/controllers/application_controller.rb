@@ -29,6 +29,12 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def require_login
+    return if current_user
+
+    redirect_to login_path, alert: "Tu dois être connecté pour accéder à cette page."
+  end
+
   def record_not_found
     render file: Rails.public_path.join("404.html"), layout: false, status: :not_found
   end
