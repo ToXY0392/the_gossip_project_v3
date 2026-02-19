@@ -18,5 +18,5 @@ Rails.application.routes.draw do
   end
   resources :comments, only: [:edit, :update, :destroy]
   resources :likes, only: [:create, :destroy]
-  resources :users, only: [:show]
+  resources :users, only: [:show, :edit, :update]
 end
