@@ -17,7 +17,7 @@ class GossipsController < ApplicationController
   end
 
   def create
-    @gossip = current_user.gossips.new(gossip_params)
+    @gossip = current_user.gossips.create(gossip_params)
     @gossip.tag_ids = [params[:gossip][:tag_id]].compact if params[:gossip][:tag_id].present?
 
     if @gossip.save
@@ -51,6 +51,7 @@ class GossipsController < ApplicationController
   private
 
   def gossip_params
-    params.require(:gossip).permit(:title, :content, :tag_id)
+    params.require(:gossip).permit(:title, :content, tag_ids: [])
+ 
   end
 end
