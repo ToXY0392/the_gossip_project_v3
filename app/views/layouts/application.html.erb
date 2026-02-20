@@ -65,15 +65,15 @@
       <div class="container py-3 text-center">
         <small class="text-body-secondary d-block">THP Gossip Project 2026</small>
         <small class="text-body-secondary d-flex align-items-center justify-content-center gap-2 mt-2">
-          <a href="https://www.instagram.com" class="link-light link-offset-2 d-inline-flex align-items-center gap-1" target="_blank" rel="noopener" title="Instagram">
+          <%= link_to "https://www.instagram.com", class: "link-light link-offset-2 d-inline-flex align-items-center gap-1", target: "_blank", rel: "noopener", title: "Instagram" do %>
             <i class="bi bi-instagram"></i>
-          </a>
-          <a href="https://www.linkedin.com" class="link-light link-offset-2 d-inline-flex align-items-center gap-1" target="_blank" rel="noopener" title="LinkedIn">
+          <% end %>
+          <%= link_to "https://www.linkedin.com", class: "link-light link-offset-2 d-inline-flex align-items-center gap-1", target: "_blank", rel: "noopener", title: "LinkedIn" do %>
             <i class="bi bi-linkedin"></i>
-          </a>
-          <a href="https://www.thehackingproject.org" class="link-light link-offset-2 d-inline-flex align-items-center gap-1" target="_blank" rel="noopener" title="THP">
+          <% end %>
+          <%= link_to "https://www.thehackingproject.org", class: "link-light link-offset-2 d-inline-flex align-items-center gap-1", target: "_blank", rel: "noopener", title: "THP" do %>
             <i class="bi bi-globe2"></i>
-          </a>
+          <% end %>
         </small>
       </div>
     </footer>
