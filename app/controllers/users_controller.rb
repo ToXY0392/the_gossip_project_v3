@@ -13,6 +13,7 @@ class UsersController < ApplicationController
 
     if @user.save
       session[:user_id] = @user.id
+      remember_user(@user) if params[:remember_me].present?
       redirect_to root_path, notice: "Profil créé, tu es maintenant connecté en tant que #{@user.first_name}."
     else
       render :new, status: :unprocessable_entity

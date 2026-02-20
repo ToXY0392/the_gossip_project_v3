@@ -18,4 +18,29 @@ class User < ApplicationRecord
 
   # Likes
   has_many :likes
+
+  # Remember me (cookie token)
+  def self.new_remember_token
+    SecureRandom.urlsafe_base64
+  end
+
+  def self.digest(token)
+    Digest::SHA256.hexdigest(token.to_s)
+  end
+
+  def remember
+    token = self.class.new_remember_token
+    update_column(:remember_digest, self.class.digest(token))
+    token
+  end
+
+  def forget
+    update_column(:remember_digest, nil)
+  end
+
+  def remember_token_valid?(token)
+    return false if remember_digest.blank?
+
+    ActiveSupport::SecurityUtils.secure_compare(remember_digest, self.class.digest(token))
+  end
 end

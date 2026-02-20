@@ -18,6 +18,11 @@
           <%= form.password_field :password, class: "form-control", required: true, autocomplete: "current-password" %>
         </div>
 
+        <div class="mb-3 form-check">
+          <%= check_box_tag :remember_me, "1", false, class: "form-check-input" %>
+          <%= label_tag :remember_me, "Se souvenir de moi", class: "form-check-label" %>
+        </div>
+
         <div class="mb-4 text-center">
           <%= form.submit "Se connecter", class: "btn btn-gossip btn-login-submit" %>
         </div>

@@ -4,7 +4,30 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def current_user
-    @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id].present?
+    if session[:user_id].present?
+      @current_user ||= User.find_by(id: session[:user_id])
+    elsif (payload = cookies.signed[:remember_token]).is_a?(Array) && payload.size == 2
+      user_id, token = payload
+      user = User.find_by(id: user_id)
+      if user&.remember_token_valid?(token)
+        session[:user_id] = user.id
+        @current_user = user
+      end
+    end
+    @current_user
+  end
+
+  def remember_user(user)
+    token = user.remember
+    cookies.signed[:remember_token] = {
+      value: [user.id, token],
+      expires: 2.weeks.from_now
+    }
+  end
+
+  def forget_user(user)
+    user.forget
+    cookies.delete(:remember_token)
   end
 
   # region agent log

@@ -60,6 +60,11 @@
           <%= form.text_field :city_zip_code, class: "form-control", required: true %>
         </div>
 
+        <div class="mb-3 form-check">
+          <%= check_box_tag :remember_me, "1", false, class: "form-check-input" %>
+          <%= label_tag :remember_me, "Se souvenir de moi", class: "form-check-label" %>
+        </div>
+
         <div class="d-flex gap-2">
           <%= form.submit "Créer mon profil", class: "btn btn-gossip" %>
           <%= link_to "Annuler", root_path, class: "btn btn-outline-secondary" %>
